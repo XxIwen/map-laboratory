@@ -16,11 +16,12 @@ MAP_ORIGIN.init = function () {
 MAP_ORIGIN.initMap = function () {
   var tileLayer = new ol.layer.Tile({ source: new ol.source.OSM() });
   MAP_ORIGIN.view = new ol.View({
-    center: ol.proj.fromLonLat([37.41, 8.82]),
-    zoom: 4,
+    // center: ol.proj.fromLonLat([37.41, 8.82]),
+    center: ol.proj.fromLonLat([103.838665, 1.3]),
+    zoom: 11,
   });
   MAP_ORIGIN.map = new ol.Map({
-    target: "MAP",
+    target: MAP_ORIGIN.$map[0],
     layers: [tileLayer],
     view: this.view,
   });
