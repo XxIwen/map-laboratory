@@ -2,7 +2,7 @@
  * Use ol.source.XYZ to load map tiles of Tiled Map Service from ArcGIS Server
  * This Tiled Map Service is not specification from Online Map;
  * So should make a mapping and formatting for url loading map tile
- * 
+ *
  * Tile Layer Parameters:
  * minZoom: 0
  * maxZoom: 8
@@ -12,7 +12,7 @@
  * resolutions: []
  * sizes: []
  * tileMatrixOrigins: []
- * 
+ *
  * **/
 
 var ARCGIS_TILE_LAYER = {
@@ -62,13 +62,11 @@ ARCGIS_TILE_LAYER.initMap = function () {
   //     }),
   //   }),
   // });
-  var xy = ol.proj.fromLonLat([103.5643, 1.4917], "EPSG:3857")
+  var xy = ol.proj.fromLonLat([103.5643, 1.4917], "EPSG:3857");
   console.log({ xy });
 
   var ivhTileGrid = new ol.tilegrid.TileGrid({
     minZoom: 0,
-    // extent: [103.5643, 1.1212, 104.4106, 1.4917],
-    // origin: [-400, 399.9999999999998],
     origins: [
       [103.45633, 1.61997],
       [103.45633, 1.61997],
@@ -102,28 +100,6 @@ ARCGIS_TILE_LAYER.initMap = function () {
       [348, 153],
       [696, 305],
     ],
-    // sizes: [
-    //   [2, 4],
-    //   [4, 7],
-    //   [6, 12],
-    //   [10, 23],
-    //   [20, 45],
-    //   [39, 88],
-    //   [77, 175],
-    //   [153, 348],
-    //   [305, 696],
-    // ],
-    // sizes: [
-    //   [1310, 1657],
-    //   [2620, 3313],
-    //   [5239, 6625],
-    //   [10232, 12939],
-    //   [20464, 25878],
-    //   [40927, 51755],
-    //   [81853, 103509],
-    //   [163706, 207017],
-    //   [327411, 414034],
-    // ],
     tileSize: [256, 256],
   });
 
@@ -140,9 +116,6 @@ ARCGIS_TILE_LAYER.initMap = function () {
   ];
 
   var tileLayer = new ol.layer.Tile({
-    // source: new ol.source.TileArcGISRest({
-    //   url: ARCGIS_TILE_LAYER.arcgisServices.tiledMapSG,
-    // }),
     source: new ol.source.XYZ({
       attributions: "Copyright:© 2021 ESRI, IVH-Cloud",
       url: ARCGIS_TILE_LAYER.arcgisServices.tiledMapSG + "/tile/{z}/{x}/{y}",
@@ -176,6 +149,11 @@ ARCGIS_TILE_LAYER.initMap = function () {
   //     },
   //   }),
   // });
+  // var tileLayer1 = new ol.layer.Tile({
+  //   source: new ol.source.TileArcGISRest({
+  //     url: ARCGIS_TILE_LAYER.arcgisServices.tiledMapSG,
+  //   }),
+  // });
   var tileLayerOSM = new ol.layer.Tile({ source: new ol.source.OSM() });
 
   this.view = new ol.View({
@@ -197,8 +175,6 @@ ARCGIS_TILE_LAYER.initMap = function () {
     // layers: [tileLayer],
     view: this.view,
   });
-
-  console.log({ tileLayer: tileLayer, view: this.view, map: this.map });
 };
 
 // ARCGIS_TILE_LAYER.initEvent = function () {};
