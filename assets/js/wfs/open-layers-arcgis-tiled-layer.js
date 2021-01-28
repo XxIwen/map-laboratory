@@ -116,7 +116,7 @@ ARCGIS_TILE_LAYER.initMap = function () {
 
   var tileLayer = new ol.layer.Tile({
     source: new ol.source.XYZ({
-      attributions: "Copyright:© 2021 ESRI, IVH-Cloud",
+      attributions: "Copyright:© 2021 ESRI",
       url: ARCGIS_TILE_LAYER.arcgisServices.tiledMapSG + "/tile/{z}/{x}/{y}",
       maxZoom: 8,
       minZoom: 0,
