@@ -1,3 +1,20 @@
+/**
+ * Use ol.source.XYZ to load map tiles of Tiled Map Service from ArcGIS Server
+ * This Tiled Map Service is not specification from Online Map;
+ * So should make a mapping and formatting for url loading map tile
+ * 
+ * Tile Layer Parameters:
+ * minZoom: 0
+ * maxZoom: 8
+ * projection: "EPSG:4326"
+ * tileSize: 256
+ * origins: []
+ * resolutions: []
+ * sizes: []
+ * tileMatrixOrigins: []
+ * 
+ * **/
+
 var ARCGIS_TILE_LAYER = {
   $map: $("#MAP"),
   map: null,
@@ -45,21 +62,23 @@ ARCGIS_TILE_LAYER.initMap = function () {
   //     }),
   //   }),
   // });
+  var xy = ol.proj.fromLonLat([103.5643, 1.4917], "EPSG:3857")
+  console.log({ xy });
 
   var ivhTileGrid = new ol.tilegrid.TileGrid({
     minZoom: 0,
     // extent: [103.5643, 1.1212, 104.4106, 1.4917],
     // origin: [-400, 399.9999999999998],
     origins: [
-      [103.5643, 1.1212],
-      [103.5643, 1.1212],
-      [103.5643, 1.1212],
-      [103.5643, 1.1212],
-      [103.5643, 1.1212],
-      [103.5643, 1.1212],
-      [103.5643, 1.1212],
-      [103.5643, 1.1212],
-      [103.5643, 1.1212],
+      [103.45633, 1.61997],
+      [103.45633, 1.61997],
+      [103.532175, 1.544926],
+      [103.531557, 1.494389],
+      [103.550897, 1.494313],
+      [103.560681, 1.494389],
+      [103.560681, 1.494389],
+      [103.563088, 1.491977],
+      [103.563088, 1.491977],
     ],
     resolutions: [
       0.00118973050291514,
@@ -162,7 +181,9 @@ ARCGIS_TILE_LAYER.initMap = function () {
   this.view = new ol.View({
     center: [103.838665, 1.3],
     // center: ol.proj.fromLonLat([103.838665, 1.3]),
-    zoom: 11,
+    minZoom: 10,
+    maxZoom: 18,
+    zoom: 10,
     projection: "EPSG:4326",
   });
   this.map = new ol.Map({
@@ -173,6 +194,7 @@ ARCGIS_TILE_LAYER.initMap = function () {
     ]),
     target: ARCGIS_TILE_LAYER.$map[0],
     layers: [tileLayerOSM, tileLayer],
+    // layers: [tileLayer],
     view: this.view,
   });
 
