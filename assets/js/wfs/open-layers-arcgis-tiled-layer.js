@@ -63,7 +63,6 @@ ARCGIS_TILE_LAYER.initMap = function () {
   //   }),
   // });
   var xy = ol.proj.fromLonLat([103.5643, 1.4917], "EPSG:3857");
-  console.log({ xy });
 
   var ivhTileGrid = new ol.tilegrid.TileGrid({
     minZoom: 0,
