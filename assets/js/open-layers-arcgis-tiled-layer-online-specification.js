@@ -65,9 +65,9 @@ ARCGIS_TILE_LAYER.initMap = function () {
 
   this.view = new ol.View({
     center: ol.proj.fromLonLat([103.838665, 1.35]),
-    minZoom: 12,
+    minZoom: 10,
     maxZoom: 18,
-    zoom: 12,
+    zoom: 15,
     projection: "EPSG:3857",
   });
   this.map = new ol.Map({

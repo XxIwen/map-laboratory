@@ -19,7 +19,7 @@ var NGINX_TILE_LAYER = {
   $map: $("#MAP"),
   map: null,
   view: null,
-  serverAddress: "",
+  serverAddress: "http://localhost:3400",
 };
 
 $(document).ready(function () {
@@ -45,12 +45,13 @@ NGINX_TILE_LAYER.initMap = function () {
       tileLoadFunction: function (tile, src) {
         var basicTileURL = src.match(/\S+tile\//g); // array
         var xyz = (src.match(/\d+\/\d+\/\d+/g) || []).join("").split("/");
-        const xyzCP = xyz.slice();
-        xyzCP[1] = Number(xyz[2]);
-        xyzCP[2] = Number(xyz[1]);
+        const _xyz = xyz.slice();
+        _xyz[0] = 'L' + NGINX_TILE_LAYER.toTransformFilePath(Number(xyz[0]), 2, 10);
+        _xyz[1] = 'R' + NGINX_TILE_LAYER.toTransformFilePath(Number(xyz[2]), 8, 16);
+        _xyz[2] = 'C' + NGINX_TILE_LAYER.toTransformFilePath(Number(xyz[1]), 8, 16);
 
-        basicTileURL.push(xyzCP.join("/"));
-        var url = basicTileURL.join("");
+        basicTileURL.push(_xyz.join("/"));
+        var url = basicTileURL.join("") + ".png";
         tile.getImage().src = url;
       },
     }),
@@ -60,9 +61,9 @@ NGINX_TILE_LAYER.initMap = function () {
 
   this.view = new ol.View({
     center: ol.proj.fromLonLat([103.838665, 1.35]),
-    minZoom: 12,
+    minZoom: 10,
     maxZoom: 18,
-    zoom: 12,
+    zoom: 10,
     projection: "EPSG:3857",
   });
   this.map = new ol.Map({
@@ -71,5 +72,13 @@ NGINX_TILE_LAYER.initMap = function () {
     view: this.view,
   });
 };
+
+NGINX_TILE_LAYER.toTransformFilePath = function(num, len, radix) {
+  var str = num.toString(radix || 10);
+  while (str.length < len) {
+    str = "0" + str;
+  }
+  return str;
+}
 
 // NGINX_TILE_LAYER.initEvent = function () {};
